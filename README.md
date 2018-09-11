@@ -8,4 +8,4 @@ Things we should add
 1. Noise term for motion
 
 Things we need to try out
-2. At a mode for hamming makers and compare the performace 
+1. At a mode for hamming makers and compare the performace 
