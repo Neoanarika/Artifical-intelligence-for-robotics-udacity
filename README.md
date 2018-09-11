@@ -9,3 +9,4 @@ Things we should add
 
 Things we need to try out
 1. At a mode for hamming makers and compare the performace 
+2. Maybe add localisation + motion planning ?
