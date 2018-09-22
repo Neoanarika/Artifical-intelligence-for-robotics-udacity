@@ -1,4 +1,8 @@
-# Monte carlo localisation
+# Artifical intelligence for robotics 
+
+Here is some code from the artifical intelligence for robotics for udacity, they are not homework solutions rather some after thoughts I had and re-implementation of the course material using numpy and python 3. 
+
+## Monte carlo localisation
 
 Implementation of 2D monte carlo localisation using histogram filters in numpy. 
 
