@@ -14,3 +14,11 @@ Things we should add
 Things we need to try out
 1. At a mode for hamming makers and compare the performace 
 2. Maybe add localisation + motion planning ?
+
+## Particle filter
+
+Implementation of 2D particle filter
+
+![Alt Text](https://github.com/Neoanarika/monte-carlo-localisation/blob/master/particle_filter.gif)
+
+This gif, shows how the particle density changes over time. 
