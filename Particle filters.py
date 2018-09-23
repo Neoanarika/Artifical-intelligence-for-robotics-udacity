@@ -96,41 +96,44 @@ def eval(r, p):
         sum += err
     return sum / float(len(p))
 
-
-N_particles = 1000
-myrobot = robot()
-p = [robot() for i in range(N_particles)]
-frames = [p]
 def x_y_split(p):
     x = [i.x for i in p]
     y = [i.y for i in p]
     return [x,y]
+
 def animate(i):
     hist = plt.hist2d(*x_y_split(frames[i]))
     time.sleep(0.2)
     return hist
 
+N_particles = 1000
+myrobot = robot()
+p = [robot() for i in range(N_particles)]
+frames = [p]
+
 fig = plt.figure()
 hist = plt.hist2d(*x_y_split(p))
+
 def init():
     hist = plt.hist2d(*x_y_split(p))
     return hist
 
-for i in range(10):
-    myrobot = myrobot.move(0.1, 5.0)
-    Z = myrobot.sense()
-    p = [bot.set_noise(0.05, 0.05, 5.0).move(0.1,5) for bot in p]
-    weights = [part.measurement_prob(Z) for part in p]
-    p_re,beta = [],0
-    for i in range(N_particles):
-        beta += 2*max(weights)*random.random()
-        index = 0
-        while weights[index] < beta:
-            beta = beta - weights[index]
-            index = index+1
-        p_re.append(p[index])
-    p = p_re
-    frames.append(p)
-anim = FuncAnimation(fig, animate, init_func=init, frames=len(frames),
-                               interval=50)
-plt.show()
+if __name__ == "__main":
+    for i in range(10):
+        myrobot = myrobot.move(0.1, 5.0)
+        Z = myrobot.sense()
+        p = [bot.set_noise(0.05, 0.05, 5.0).move(0.1,5) for bot in p]
+        weights = [part.measurement_prob(Z) for part in p]
+        p_re,beta = [],0
+        for i in range(N_particles):
+            beta += 2*max(weights)*random.random()
+            index = 0
+            while weights[index] < beta:
+                beta = beta - weights[index]
+                index = index+1
+            p_re.append(p[index])
+        p = p_re
+        frames.append(p)
+    anim = FuncAnimation(fig, animate, init_func=init, frames=len(frames),
+                                   interval=50)
+    plt.show()
