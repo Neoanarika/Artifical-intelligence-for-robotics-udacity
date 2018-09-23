@@ -1,7 +1,8 @@
 from math import *
 import random
-
-
+import matplotlib.pyplot as plt
+from matplotlib.animation import FuncAnimation
+import time
 
 landmarks  = [[20.0, 20.0], [80.0, 80.0], [20.0, 80.0], [80.0, 20.0]]
 world_size = 100.0
@@ -96,12 +97,25 @@ def eval(r, p):
     return sum / float(len(p))
 
 
-
-####   DON'T MODIFY ANYTHING ABOVE HERE! ENTER CODE BELOW ####
-
 N_particles = 1000
 myrobot = robot()
 p = [robot() for i in range(N_particles)]
+frames = [p]
+def x_y_split(p):
+    x = [i.x for i in p]
+    y = [i.y for i in p]
+    return [x,y]
+def animate(i):
+    hist = plt.hist2d(*x_y_split(frames[i]))
+    time.sleep(0.2)
+    return hist
+
+fig = plt.figure()
+hist = plt.hist2d(*x_y_split(p))
+def init():
+    hist = plt.hist2d(*x_y_split(p))
+    return hist
+
 for i in range(10):
     myrobot = myrobot.move(0.1, 5.0)
     Z = myrobot.sense()
@@ -116,4 +130,7 @@ for i in range(10):
             index = index+1
         p_re.append(p[index])
     p = p_re
-    print(p_re)
+    frames.append(p)
+anim = FuncAnimation(fig, animate, init_func=init, frames=len(frames),
+                               interval=50)
+plt.show()
