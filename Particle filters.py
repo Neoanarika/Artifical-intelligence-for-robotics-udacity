@@ -118,7 +118,7 @@ def init():
     hist = plt.hist2d(*x_y_split(p))
     return hist
 
-if __name__ == "__main":
+if __name__ == "__main__":
     for i in range(10):
         myrobot = myrobot.move(0.1, 5.0)
         Z = myrobot.sense()
